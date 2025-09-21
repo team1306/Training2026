@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.revrobotics.spark.SparkLowLevel;
+import com.revrobotics.spark.SparkMax;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.ExampleDrivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -24,6 +27,21 @@ public class RobotContainer {
     public RobotContainer() {
         // Configure the trigger bindings
         configureBindings();
+
+        intake();
+    }
+
+    //Intro tutorial
+    private void intake() {
+        final int MOTOR_ID = 4;
+
+        //Define a motor
+        SparkMax motor = new SparkMax(MOTOR_ID, SparkLowLevel.MotorType.kBrushless);
+
+        //Controller binding
+        controller.a()
+                .onTrue(new InstantCommand(() -> motor.set(1))) //when a is pressed, set speed to 1
+                .onFalse(new InstantCommand(() -> motor.set(0))); //when a is released, set speed back to 0
     }
 
     private void configureBindings() {

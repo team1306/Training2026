@@ -11,6 +11,7 @@ import frc.robot.util.SparkMaxMotor;
 
 import java.util.function.DoubleSupplier;
 
+/// Example class for lesson 2
 public class ExampleDrivetrain extends SubsystemBase {
     //Motor IDs. Normally these are declared in a constants file
     private static final int LEFT_MOTOR_1_ID = 0;
