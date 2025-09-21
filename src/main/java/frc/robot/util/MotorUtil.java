@@ -14,7 +14,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.math.MathUtil;
 
 public class MotorUtil {
-    private static int NEO_CURRENT_LIMIT_AMPS = 80;
+    private static final int NEO_CURRENT_LIMIT_AMPS = 80;
 
     public static SparkMax initSparkMax(int motorId, IdleMode idleMode, boolean inverted) {
         SparkMax motor = new SparkMax(motorId, MotorType.kBrushless);

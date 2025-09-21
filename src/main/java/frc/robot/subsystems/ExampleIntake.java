@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import badgerlog.annotations.Entry;
+import badgerlog.annotations.EntryType;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.util.Motor;
@@ -13,11 +15,12 @@ public class ExampleIntake extends SubsystemBase {
 
     private final MotorGroup<Motor> motorGroup;
 
+    @Entry(EntryType.PUBLISHER)
     private double targetSpeed;
 
     public ExampleIntake() {
         Motor motor = new TalonFxMotor(MotorUtil.initTalonFX(MOTOR_ID, NeutralModeValue.Coast));
-        motorGroup = new MotorGroup<Motor>(motor);
+        motorGroup = new MotorGroup<>(motor);
     }
 
     @Override
@@ -29,5 +32,6 @@ public class ExampleIntake extends SubsystemBase {
         //using setters instead of public fields is useful because you can intercept the value and modify it or make sure it is correct.
         //in this case, I am clamping the input number so that target speed stays between -1 and 1, no matter what
         targetSpeed = MotorUtil.clampPercent(speed);
+        System.out.println("Target speed set to " +  targetSpeed);
     }
 }

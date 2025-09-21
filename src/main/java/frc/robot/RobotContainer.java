@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.ExampleDrivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.subsystems.ExampleIntake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -20,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     ExampleDrivetrain drivetrain = new ExampleDrivetrain();
+    ExampleIntake intake = new ExampleIntake();
 
     private final CommandXboxController controller = new CommandXboxController(0);
 
@@ -46,6 +48,9 @@ public class RobotContainer {
 
     private void configureBindings() {
         drivetrain.setDefaultCommand(drivetrain.tankDrive(() -> controller.getLeftY(), () -> controller.getLeftX()));
+        controller.a()
+                .onTrue(new InstantCommand(() -> intake.setTargetSpeed(1), intake)) //don't forget to add requirements
+                .onFalse(new InstantCommand(() -> intake.setTargetSpeed(0), intake));
     }
 
     /**
