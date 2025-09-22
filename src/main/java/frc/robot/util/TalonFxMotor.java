@@ -2,6 +2,7 @@ package frc.robot.util;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.AngularVelocity;
 
 public final class TalonFxMotor implements Motor {
     private final TalonFX motor;
@@ -21,8 +22,12 @@ public final class TalonFxMotor implements Motor {
     }
 
     @Override
+    public AngularVelocity getVelocity() {
+        return motor.getVelocity().getValue();
+    }
+
+    @Override
     public Angle getPosition() {
         return motor.getPosition().getValue();
     }
-
 }
